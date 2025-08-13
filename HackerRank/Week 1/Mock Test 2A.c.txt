@@ -1,0 +1,31 @@
+/*
+ * Complete the 'flippingMatrix' function below.
+ *
+ 1
+ 2
+ 3
+ 4
+ 4/5
+ * The function is expected to return an INTEGER.
+ * The function accepts 2D_INTEGER_ARRAY matrix as parameter.
+ */
+ int flippingMatrix(int matrix_rows, int matrix_columns, int** matrix) {
+ int n = matrix_rows / 2;
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            // Choose the maximum possible value for position (i, j)
+            int option1 = matrix[i][j];
+            int option2 = matrix[i][matrix_columns - j - 1];
+            int option3 = matrix[matrix_rows - i - 1][j];
+            int option4 = matrix[matrix_rows - i - 1][matrix_columns - j - 
+1];
+            int max_val = option1;
+            if (option2 > max_val) max_val = option2;
+            if (option3 > max_val) max_val = option3;
+            if (option4 > max_val) max_val = option4;
+            sum += max_val;
+        }
+    }
+    return sum;
+ }
