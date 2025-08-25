@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#define MAX_Q 100000
+
+// Comparator for qsort
+int cmpfunc(const void *a, const void *b) {
+    long long int x = *(long long int *)a;
+    long long int y = *(long long int *)b;
+    if (x < y) return -1;
+    if (x > y) return 1;
+    return 0;
+}
+
+int main() {
+    int Q;
+    scanf("%d", &Q);
+
+    long long int heap[MAX_Q]; // store elements
+    int size = 0;
+
+    for (int i = 0; i < Q; i++) {
+        int type;
+        long long int v;
+        scanf("%d", &type);
+
+        if (type == 1) { 
+            // Insert v
+            scanf("%lld", &v);
+            heap[size++] = v;
+
+        } else if (type == 2) { 
+            // Delete v
+            scanf("%lld", &v);
+            for (int j = 0; j < size; j++) {
+                if (heap[j] == v) {
+                    heap[j] = heap[size - 1];
+                    size--;
+                    break;
+                }
+            }
+
+        } else if (type == 3) { 
+            // Print min
+            long long int minVal = heap[0];
+            for (int j = 1; j < size; j++) {
+                if (heap[j] < minVal) {
+                    minVal = heap[j];
+                }
+            }
+            printf("%lld\n", minVal);
+        }
+    }
+
+    return 0;
+}
