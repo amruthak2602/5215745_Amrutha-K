@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+
+#define MAX 100000
+
+int stack_enqueue[MAX], stack_dequeue[MAX];
+int top_enqueue = -1, top_dequeue = -1;
+
+void push_enqueue(int x) {
+    stack_enqueue[++top_enqueue] = x;
+}
+
+int pop_dequeue() {
+    if (top_dequeue == -1) {
+        while (top_enqueue >= 0) {
+            stack_dequeue[++top_dequeue] = stack_enqueue[top_enqueue--];
+        }
+    }
+    return (top_dequeue >= 0) ? stack_dequeue[top_dequeue--] : -1;
+}
+
+int front_dequeue() {
+    if (top_dequeue == -1) {
+        while (top_enqueue >= 0) {
+            stack_dequeue[++top_dequeue] = stack_enqueue[top_enqueue--];
+        }
+    }
+    return (top_dequeue >= 0) ? stack_dequeue[top_dequeue] : -1;
+}
+
+int main() {
+    int q;
+    scanf("%d", &q);
+
+    while (q--) {
+        int type, x;
+        scanf("%d", &type);
+
+        if (type == 1) {
+            // Enqueue
+            scanf("%d", &x);
+            push_enqueue(x);
+        } else if (type == 2) {
+            // Dequeue
+            pop_dequeue();
+        } else if (type == 3) {
+            // Print front
+            printf("%d\n", front_dequeue());
+        }
+    }
+
+    return 0;
+}

@@ -1,28 +1,15 @@
  /*
- * Complete the 'truckTour' function below.
+ * Complete the 'findMedian' function below.
  *
  * The function is expected to return an INTEGER.
- * The function accepts 2D_INTEGER_ARRAY petrolpumps as parameter.
+ * The function accepts INTEGER_ARRAY arr as parameter.
  */
- int truckTour(int petrolpumps_rows, int petrolpumps_columns, int** 
-petrolpumps) {
- long long total_petrol = 0;
- long long curr_petrol = 0;
- int start_index = 0;
- for (int i = 0; i < petrolpumps_rows; i++) {
- int petrol = petrolpumps[i][0];
- int distance = petrolpumps[i][1];
-        total_petrol += (petrol - distance);
-        curr_petrol += (petrol - distance);
-        if (curr_petrol < 0) {
-            // Cannot start from this pump or any before it
-            start_index = i + 1;
-            curr_petrol = 0;
-        }
-    }
-    if (total_petrol >= 0) {
-        return start_index;
-    } else {
-        return -1; // Should not happen as per problem guarantees
-    }
-}
+ int compare(const void* a, const void* b) {
+ return (*(int*)a - *(int*)b);
+ }
+ int findMedian(int arr_count, int* arr) {
+ qsort(arr, arr_count, sizeof(int), compare);
+ // Since n is odd, median is the middle element
+ int mid_index = arr_count / 2;
+ return arr[mid_index];
+ }

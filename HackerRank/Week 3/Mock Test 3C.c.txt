@@ -1,0 +1,28 @@
+int compare (const void* a, const void* b) {
+
+char* str1 = (char*)a;
+
+char* str2 = (char*)b;
+
+int lenl = strlen(str1);
+
+int len2 = strlen(str2);
+// First compare by length
+
+if (lenl != len2) {
+
+return lenl -len2;
+}
+// If lengths are same, compare lexicographically
+
+return strcmp(str1, str2);
+
+}
+
+
+char** bigSorting (int unsorted_count, char** unsorted, int* result_count) { 
+qsort (unsorted, unsorted_count, sizeof(char*), compare);
+
+*result_count = unsorted count;
+return unsorted;
+}
